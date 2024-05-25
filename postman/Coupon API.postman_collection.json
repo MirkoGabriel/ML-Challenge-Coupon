@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "236b5c22-8343-4b11-89ba-ef4b71723d29",
+		"name": "Coupon API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30028936"
+	},
+	"item": [
+		{
+			"name": "getItems",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURIMLCoupon}}/coupon",
+					"host": [
+						"{{BaseURIMLCoupon}}"
+					],
+					"path": [
+						"coupon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sendItems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"item_ids\": [\"MLA1362455088\", \"MLA1397155937\",\"MLA1414683545\",\"MLA1314569311\",\"MLA1150786359\"],\n    \"amount\": 70000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURIMLCoupon}}/coupon",
+					"host": [
+						"{{BaseURIMLCoupon}}"
+					],
+					"path": [
+						"coupon"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

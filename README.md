@@ -12,5 +12,8 @@ Web API para seleccionar los items dado un coupon de compra y hacer analisis de 
 - Instala dependenciuas `npm install`
 - Correr aplicacion `npm run dev`
 
+## Postman
+- Importar la coleccion y las variables que se encuentran en `\MercadoLibreChallengeCoupon\postman` de entorno en postamn
+
 ## API URL
 - https://ml-challenge-coupon.onrender.com

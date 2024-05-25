@@ -2,7 +2,7 @@ const couponsCtrl = {};
 const axios = require('axios');
 const Item = require('../models/items');
 
-couponsCtrl.postCoupons = async (req,res) => {
+couponsCtrl.postItems = async (req,res) => {
     const items = req.body.item_ids;
     const amount = req.body.amount;
 
@@ -42,7 +42,7 @@ couponsCtrl.postCoupons = async (req,res) => {
     }
 };
 
-couponsCtrl.getCoupons = async (req,res) => {
+couponsCtrl.getItems = async (req,res) => {
   const items = await Item.aggregate([
         {
             $group: {

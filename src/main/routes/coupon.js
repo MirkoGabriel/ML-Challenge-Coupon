@@ -1,11 +1,11 @@
 const {Router} = require('express');
 const router = Router();
 
-const {postCoupons, getCoupons} = require('../controllers/coupons.controller')
+const {postItems, getItems} = require('../controllers/coupons.controller')
 
-router.route('/coupon').post(postCoupons);
+router.route('/coupon').post(postItems);
 
-router.route('/coupon').get(getCoupons);
+router.route('/coupon').get(getItems);
 
 
 module.exports = router;
