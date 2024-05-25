@@ -6,23 +6,32 @@ couponsCtrl.postCoupons = async (req,res) => {
     const items = req.body.item_ids;
     const amount = req.body.amount;
 
+    const unrepeatedItems = new Set(items);
+
+    if(unrepeatedItems.size < items.length){
+        res.send({ message: "There are repeated items" });
+    }
+
    try {
+        // Realizar todas las solicitudes en paralelo
+        const itemPricePromises = items.map(item => axios.get(process.env.ML_CLIENT_URI + item));
+        const itemPriceResponses = await Promise.all(itemPricePromises);
+
         let sum = 0;
         const selectedItems = [];
-        
-        for (const item of items) {
-            const itemPriceResponse = await axios.get(process.env.ML_CLIENT_URI + item);
-            const itemPrice = itemPriceResponse.data.price;
-            
-            const newItem = new Item({
-                item: item
-            })
-            await newItem.save();
+
+        for (let i = 0; i < itemPriceResponses.length; i++) {
+            const itemPrice = itemPriceResponses[i].data.price;
+            const item = items[i];
 
             if (sum + itemPrice < amount) {
                 sum += itemPrice;
                 selectedItems.push(item);
-            } 
+
+                // Guardar el nuevo artículo en la base de datos
+                const newItem = new Item({ item });
+                await newItem.save(); // Si necesitas guardar cada artículo seleccionado
+            }
         }
 
         res.send({ item_ids: selectedItems, amount: sum });
